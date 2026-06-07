@@ -217,7 +217,7 @@ function rollGacha() {
     // 画面の書き換え（C言語の最新版の表示形式を綺麗に移植！）
     const resultBox = document.getElementById("result-content");
     resultBox.innerHTML = `
-        <div class="title-line">========== IIDX ☆12 ハード難易度S/S+ ガチャ (全92曲) ==========</div>
+        <div class="title-line">========== IIDX ☆12 ハード難易度S/S+ ガチャ (全${songs.length}曲) ==========</div>
         <div style="font-size: 1rem; color: #aaa; margin-bottom: 15px;">選ばれた楽曲はこちらです</div>
         <div class="song-name">【 ${displayName} 】<br><br>(${luckySong.folder})</div>
         <div style="font-size: 0.9rem; color: #888; margin-top: 15px;">=========================================================</div>
