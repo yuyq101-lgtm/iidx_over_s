@@ -91,17 +91,17 @@
 </div>
 
 <script>
-// 裕也くんが作成した全92曲のデータを完全移植
+// 空白を完全除去した、最終改訂版の全92曲データ
 const songs = [
     // --- 地力S (37曲) ---
     { name: "Almagest", folder: "地力S" },
     { name: "Ambivalent Vermilia", folder: "地力S" },
-    { name: "   Bad Encryption", folder: "地力S" },
+    { name: "Bad Encryption", folder: "地力S" },
     { name: "Binary Black Hole", folder: "地力S" },
     { name: "BroGamer(L)", folder: "地力S" },
-    { name: "  Carmina", folder: "地力S" },
-    { name: " Confiserie", folder: "地力S" },
-    { name: "  Dances with Snow Fairies(L)", folder: "地力S" },
+    { name: "Carmina", folder: "地力S" },
+    { name: "Confiserie", folder: "地力S" },
+    { name: "Dances with Snow Fairies(L)", folder: "地力S" },
     { name: "Dans la nuit de l'eternite", folder: "地力S" },
     { name: "EBONY & IVORY(L)", folder: "地力S" },
     { name: "Elemental Creation", folder: "地力S" },
@@ -124,7 +124,7 @@ const songs = [
     { name: "栄冠のカンパネラ", folder: "地力S" },
     { name: "駅猫のワルツ", folder: "地力S" },
     { name: "焔極OVERKILL", folder: "地力S" },
-    { name: "  お米の美味しい炊き方、そしてお米を食べることによるその効果。(L)", folder: "地力S" },
+    { name: "お米の美味しい炊き方、そしてお米を食べることによるその効果。(L)", folder: "地力S" },
     { name: "カジノファイヤーことみちゃん(L)", folder: "地力S" },
     { name: "共鳴遊戯の華", folder: "地力S" },
     { name: "IX", folder: "地力S" },
@@ -152,7 +152,7 @@ const songs = [
     { name: "VØID", folder: "個人差S" },
     { name: "WHA", folder: "個人差S" },
     { name: "Y&Co. is dead or alive", folder: "個人差S" },
-    { name: "ピアノ独奏無言歌 \"灰燼\"/", folder: "個人差S" },
+    { name: "ピアノ独奏無言歌 \"灰燼\"", folder: "個人差S" },
 
     // --- 地力S+ (26曲) ---
     { name: "Beyond Evolution", folder: "地力S+" },
@@ -176,7 +176,7 @@ const songs = [
     { name: "Verflucht(L)", folder: "地力S+" },
     { name: "3y3s", folder: "地力S+" },
     { name: "X-DEN", folder: "地力S+" },
-    { name: "   疾風迅雷(L)", folder: "地力S+" },
+    { name: "疾風迅雷(L)", folder: "地力S+" },
     { name: "ディスコルディア", folder: "地力S+" },
     { name: "卑弥呼", folder: "地力S+" },
     { name: "冥", folder: "地力S+" },
@@ -207,14 +207,14 @@ function formatLongName(name) {
 }
 
 function rollGacha() {
-    // 🎲 全92曲の中からガチの一発抽選！
+    // 🎲 92曲の中からガチの一発抽選！
     const randIdx = Math.floor(Math.random() * songs.length);
     const luckySong = songs[randIdx];
     
     // 表示用の綺麗な曲名を作る
     const displayName = formatLongName(luckySong.name);
     
-    // 画面の書き換え
+    // 画面の書き換え（C言語の最新版の表示形式を綺麗に移植！）
     const resultBox = document.getElementById("result-content");
     resultBox.innerHTML = `
         <div class="title-line">========== IIDX ☆12 ハード難易度S/S+ ガチャ (全92曲) ==========</div>
