@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIDX ☆12 ハード難易度S/S+ ガチャ</title>
+    <style>
+        body {
+            background-color: #121214;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            background: #1a1a1e;
+            padding: 30px 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            border: 1px solid #2a2a30;
+            box-sizing: border-box;
+        }
+        .result-box {
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #222227;
+            border-radius: 12px;
+            border: 1px dashed #3a3a42;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .title-line {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 10px;
+            word-break: break-all;
+        }
+        .song-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 12px;
+            width: 100%;
+            line-height: 1.4;
+            overflow-wrap: anywhere; 
+            word-break: keep-all;
+        }
+        .btn {
+            background: linear-gradient(135deg, #00ffcc 0%, #0099ff 100%);
+            color: #121214;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 80%;
+            max-width: 300px;
+            box-shadow: 0 4px 15px rgba(0, 255, 204, 0.4);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn:active {
+            transform: scale(0.96);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="result-box">
+        <div id="result-content">
+            <div style="color: #666; font-size: 1rem;">ボタンを押してガチャを回せ！</div>
+        </div>
+    </div>
+
+    <button class="btn" onclick="rollGacha()">ガチャを引く</button>
+</div>
+
+<script>
+// 裕也くんが作成した全92曲のデータを完全移植
+const songs = [
+    // --- 地力S (37曲) ---
+    { name: "Almagest", folder: "地力S" },
+    { name: "Ambivalent Vermilia", folder: "地力S" },
+    { name: "   Bad Encryption", folder: "地力S" },
+    { name: "Binary Black Hole", folder: "地力S" },
+    { name: "BroGamer(L)", folder: "地力S" },
+    { name: "  Carmina", folder: "地力S" },
+    { name: " Confiserie", folder: "地力S" },
+    { name: "  Dances with Snow Fairies(L)", folder: "地力S" },
+    { name: "Dans la nuit de l'eternite", folder: "地力S" },
+    { name: "EBONY & IVORY(L)", folder: "地力S" },
+    { name: "Elemental Creation", folder: "地力S" },
+    { name: "EMERALDAS", folder: "地力S" },
+    { name: "Everlasting Message", folder: "地力S" },
+    { name: "GO OVER WITH GLARE -ROOTAGE 26-", folder: "地力S" },
+    { name: "hard-wired", folder: "地力S" },
+    { name: "Ignis†Irae", folder: "地力S" },
+    { name: "Lost Souls(L)", folder: "地力S" },
+    { name: "MEGAERA", folder: "地力S" },
+    { name: "Override(L)", folder: "地力S" },
+    { name: "perditus†paradisus", folder: "地力S" },
+    { name: "Phoenix(L)", folder: "地力S" },
+    { name: "Saturn(L)", folder: "地力S" },
+    { name: "Sigmund", folder: "地力S" },
+    { name: "STEEL NEEDLE(L)", folder: "地力S" },
+    { name: "TRANOID(L)", folder: "地力S" },
+    { name: "VANESSA(L)", folder: "地力S" },
+    { name: "Xerulean", folder: "地力S" },
+    { name: "栄冠のカンパネラ", folder: "地力S" },
+    { name: "駅猫のワルツ", folder: "地力S" },
+    { name: "焔極OVERKILL", folder: "地力S" },
+    { name: "  お米の美味しい炊き方、そしてお米を食べることによるその効果。(L)", folder: "地力S" },
+    { name: "カジノファイヤーことみちゃん(L)", folder: "地力S" },
+    { name: "共鳴遊戯の華", folder: "地力S" },
+    { name: "IX", folder: "地力S" },
+    { name: "嘆きの樹", folder: "地力S" },
+    { name: "表裏一体！？怪盗いいんちょの悩み(L)", folder: "地力S" },
+    { name: "煉獄のエルフェリア", folder: "地力S" },
+
+    // --- 個人差S (20曲) ---
+    { name: "BLACK.by X-Cross Fade", folder: "個人差S" },
+    { name: "ECHIDNA", folder: "個人差S" },
+    { name: "Fascination MAXX", folder: "個人差S" },
+    { name: "Level 3", folder: "個人差S" },
+    { name: "Level 4", folder: "個人差S" },
+    { name: "Level One", folder: "個人差S" },
+    { name: "Lords Of The Roundtable", folder: "個人差S" },
+    { name: "Miracle 5ympho X(L)", folder: "個人差S" },
+    { name: "NZM", folder: "個人差S" },
+    { name: "Red. by Jack Trance", folder: "個人差S" },
+    { name: "REVOLVER(L)", folder: "個人差S" },
+    { name: "SOLAR ECLIPSE", folder: "個人差S" },
+    { name: "The Chase", folder: "個人差S" },
+    { name: "THE PEERLESS UNDER HEAVEN", folder: "個人差S" },
+    { name: "Time to Air(L)", folder: "個人差S" },
+    { name: "TITANS RETURN(L)", folder: "個人差S" },
+    { name: "VØID", folder: "個人差S" },
+    { name: "WHA", folder: "個人差S" },
+    { name: "Y&Co. is dead or alive", folder: "個人差S" },
+    { name: "ピアノ独奏無言歌 \"灰燼\"/", folder: "個人差S" },
+
+    // --- 地力S+ (26曲) ---
+    { name: "Beyond Evolution", folder: "地力S+" },
+    { name: "Chrono Diver -PENDULUMs-", folder: "地力S+" },
+    { name: "DEATH†ZIGOQ ～怒りの高速爆走野郎～(L)", folder: "地力S+" },
+    { name: "EROICA", folder: "地力S+" },
+    { name: "Feel The Beat(L)", folder: "地力S+" },
+    { name: "Go Ahead!!", folder: "地力S+" },
+    { name: "Go Beyond!!", folder: "地力S+" },
+    { name: "GuNGNiR(L)", folder: "地力S+" },
+    { name: "ICARUS(L)", folder: "地力S+" },
+    { name: "Illegal Function Call(L)", folder: "地力S+" },
+    { name: "KAISER PHOENIX(L)", folder: "地力S+" },
+    { name: "KAMAITACHI(L)", folder: "地力S+" },
+    { name: "Mare Nectaris", folder: "地力S+" },
+    { name: "n/a", folder: "地力S+" },
+    { name: "Sigmund(L)", folder: "地力S+" },
+    { name: "Sinus Iridum", folder: "地力S+" },
+    { name: "Somnidiscotheque", folder: "地力S+" },
+    { name: "The Limbo(L)", folder: "地力S+" },
+    { name: "Verflucht(L)", folder: "地力S+" },
+    { name: "3y3s", folder: "地力S+" },
+    { name: "X-DEN", folder: "地力S+" },
+    { name: "   疾風迅雷(L)", folder: "地力S+" },
+    { name: "ディスコルディア", folder: "地力S+" },
+    { name: "卑弥呼", folder: "地力S+" },
+    { name: "冥", folder: "地力S+" },
+    { name: "惑星鉄道", folder: "地力S+" },
+
+    // --- 個人差S+ (9曲) ---
+    { name: "DIAVOLO", folder: "個人差S+" },
+    { name: "Level 5", folder: "個人差S+" },
+    { name: "Plan 8", folder: "個人差S+" },
+    { name: "RAGE feat.H14 of LEONAIR", folder: "個人差S+" },
+    { name: "SAMURAI-Scramble(L)", folder: "個人差S+" },
+    { name: "Thor's Hammer", folder: "個人差S+" },
+    { name: "Timepiece phase II (CN Ver.)", folder: "個人差S+" },
+    { name: "灼熱 Pt.2 Long Train Running", folder: "個人差S+" },
+    { name: "灼熱Beach Side Bunny", folder: "個人差S+" }
+];
+
+// 💡 長い曲名だけを「うまいこと」改行する処理
+function formatLongName(name) {
+    if (name.length < 16) return name;
+    if (name.includes(" -")) return name.replace(" -", "<br>-");
+    if (name.includes(" ～")) return name.replace(" ～", "<br>～");
+    if (name.includes("～")) return name.replace("～", "<br>～");
+    if (name.includes(" (")) return name.replace(" (", "<br>(");
+    if (name.includes("(")) return name.replace("(", "<br>(");
+    if (name.includes("、")) return name.replace("、", "<br>、");
+    return name; 
+}
+
+function rollGacha() {
+    // 🎲 全92曲の中からガチの一発抽選！
+    const randIdx = Math.floor(Math.random() * songs.length);
+    const luckySong = songs[randIdx];
+    
+    // 表示用の綺麗な曲名を作る
+    const displayName = formatLongName(luckySong.name);
+    
+    // 画面の書き換え
+    const resultBox = document.getElementById("result-content");
+    resultBox.innerHTML = `
+        <div class="title-line">========== IIDX ☆12 ハード難易度S/S+ ガチャ (全92曲) ==========</div>
+        <div style="font-size: 1rem; color: #aaa; margin-bottom: 15px;">選ばれた楽曲はこちらです</div>
+        <div class="song-name">【 ${displayName} 】<br><br>(${luckySong.folder})</div>
+        <div style="font-size: 0.9rem; color: #888; margin-top: 15px;">=========================================================</div>
+    `;
+}
+</script>
+
+</body>
+</html>
